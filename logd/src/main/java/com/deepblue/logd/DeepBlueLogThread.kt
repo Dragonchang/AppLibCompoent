@@ -3,10 +3,9 @@ package com.deepblue.logd
 import android.os.StatFs
 import android.text.TextUtils
 import android.util.Log
-
 import java.io.File
 import java.text.SimpleDateFormat
-import java.util.Date
+import java.util.*
 import java.util.concurrent.ConcurrentLinkedQueue
 
 class DeepBlueLogThread internal constructor(
@@ -105,7 +104,9 @@ class DeepBlueLogThread internal constructor(
         if (action == null || !action.isValid()) {
             return
         }
-        if (mDeepBlueNativeLog == null) {
+        if (mDeepBlueNativeLog == null || !(mInitCode == ConstantCode.CLOGAN_INIT_SUCCESS_MMAP
+                    || mInitCode == ConstantCode.CLOGAN_INIT_SUCCESS_MEMORY
+                    || mInitCode == ConstantCode.CLOGAN_INIT_SUCESS_ALREADY)) {
             mDeepBlueNativeLog = DeepBlueNativeLog.newInstance()
             mInitCode = mDeepBlueNativeLog!!.logan_init(mCachePath, mPath, mMaxLogFile.toInt())
         }

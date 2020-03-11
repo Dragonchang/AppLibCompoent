@@ -35,7 +35,7 @@ Log.t 代替 Throwable.printStackTrace
 
 version: 0.0.1  
 updateTime: 2019-12-26   
-owner： zhangfl@deepblueai.com  
+owner： zhangfl
 
 改进计划：  
 实现抓取native crash log。  
@@ -44,3 +44,6 @@ owner： zhangfl@deepblueai.com
 
 updateTime: 2019-12-30
 添加fd leak 和java heap大小监控的功能。
+
+updateTime: 2019-12-30
+添加主线程监控的功能。

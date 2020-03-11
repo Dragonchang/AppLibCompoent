@@ -2,7 +2,6 @@ package com.deepblue.logd
 
 import android.os.Looper
 import android.text.TextUtils
-
 import java.util.concurrent.ConcurrentLinkedQueue
 
 class DeepBlueLogControl private constructor(config: DeepBlueLogConfig) {
@@ -70,7 +69,6 @@ class DeepBlueLogControl private constructor(config: DeepBlueLogConfig) {
             return
         }
         val action = WriteAction()
-        val threadName = Thread.currentThread().name
         val threadLog = Thread.currentThread().id
         var isMain = false
         if (Looper.getMainLooper() == Looper.myLooper()) {
@@ -82,7 +80,7 @@ class DeepBlueLogControl private constructor(config: DeepBlueLogConfig) {
         action.isMainThread = isMain
         action.threadId = threadLog
         action.pid = mPid
-        action.threadName = threadName
+        action.threadName = getThreadName()
         mCacheLogQueue.add(action)
         if (mLogThread != null) {
             mLogThread!!.notifyRun()
@@ -94,7 +92,6 @@ class DeepBlueLogControl private constructor(config: DeepBlueLogConfig) {
             return
         }
         val action = WriteAction()
-        val threadName = Thread.currentThread().name
         val threadLog = Thread.currentThread().id
         var isMain = false
         if (Looper.getMainLooper() == Looper.myLooper()) {
@@ -106,7 +103,7 @@ class DeepBlueLogControl private constructor(config: DeepBlueLogConfig) {
         action.isMainThread = isMain
         action.threadId = threadLog
         action.pid = mPid
-        action.threadName = threadName
+        action.threadName = getThreadName()
         mCacheLogQueue.add(action)
         if (mLogThread != null) {
             mLogThread!!.notifyRun()
@@ -124,8 +121,27 @@ class DeepBlueLogControl private constructor(config: DeepBlueLogConfig) {
         }
     }
 
+    private fun getThreadName(): String {
+        var threadName = Thread.currentThread().name
+        if (!TextUtils.isEmpty(threadName)) {
+            threadName = if (threadName.length < THREAD_NAME_LENGTH) {
+                var left = THREAD_NAME_LENGTH - threadName.length
+                val str = StringBuilder(threadName)
+                do {
+                    str.append(" ")
+                    --left
+                } while (left > 0)
+                str.toString()
+            } else {
+                threadName.substring(0, THREAD_NAME_LENGTH)
+            }
+        }
+        return threadName
+    }
+
     companion object {
 
+        private const val THREAD_NAME_LENGTH = 13
         @Volatile
         private var sLoganControlCenter: DeepBlueLogControl? = null
 

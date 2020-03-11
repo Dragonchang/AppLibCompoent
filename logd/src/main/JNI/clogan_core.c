@@ -413,7 +413,11 @@ int clogan_open(const char *pathname) {
         memcpy(temp, pathname, strlen(pathname)); //创建文件路径
         logan_model->file_path = temp_file;
 		LOGI("clogan_open file: %s", temp_file);
-
+        if (NULL != _dir_path) {
+            if (!is_file_exist_clogan(_dir_path)) {
+                makedir_clogan(_dir_path);
+            }
+        }
         if (!init_file_clogan(logan_model)) {  //初始化文件IO和文件大小
             is_open_ok = 0;
             back = CLOGAN_OPEN_FAIL_IO;
