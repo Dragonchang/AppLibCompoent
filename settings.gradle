@@ -1,2 +1,2 @@
-include ':app', ':logd'
+include ':app', ':logd',':owlrtmpplayer',':ijkplayer-java'
 rootProject.name='AppLibCompoent'

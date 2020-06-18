@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--大小-->
+    <dimen name="buffer_progress_size">50dp</dimen>
+    <dimen name="start_play_size">70dp</dimen>
+</resources>

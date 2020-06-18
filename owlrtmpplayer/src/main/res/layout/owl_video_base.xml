@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black"
+    android:gravity="center">
+    <LinearLayout
+        android:id="@+id/surface_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+    </LinearLayout>
+    <com.deepblue.owlrtmpplayer.view.BufferProgress
+        android:id="@+id/buffer_progress"
+        android:layout_width="@dimen/buffer_progress_size"
+        android:layout_height="@dimen/buffer_progress_size"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center_vertical"
+        android:visibility="gone">
+
+    </com.deepblue.owlrtmpplayer.view.BufferProgress>
+
+    <com.deepblue.owlrtmpplayer.view.StartPlayView
+        android:id="@+id/start"
+        android:layout_width="@dimen/start_play_size"
+        android:layout_height="@dimen/start_play_size"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center_vertical"
+        android:visibility="gone"/>
+</RelativeLayout>

@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">owlPlayer</string>
+    <string name="error_toast">请检查网络或者设备状态</string>
+</resources>
